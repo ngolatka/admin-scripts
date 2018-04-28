@@ -7,8 +7,13 @@
 
 if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ];
 then
-  echo >&2 "Missing parameter. Syntax: `basename $0` <Sender> <Receiver> <Subject> <Body>"
+
+  echo >&2 "Missing parameter
+
+Syntax: `basename $0` <Sender> <Receiver> <Subject> <Body>"
+
   exit 1
+
 fi
 
 mailSender="$1"

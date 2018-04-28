@@ -6,9 +6,10 @@
 if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ];
 then
 
-  echo "Missing parameter"
-  echo "Example:"
-  echo "`basename $0` /dev/sda1 85 from@example.com to@example.com"
+  echo >&2 "Missing parameter
+Example:
+`basename $0` /dev/sda1 85 from@example.com to@example.com"
+
   exit 1
 
 fi

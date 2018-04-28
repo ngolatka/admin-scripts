@@ -11,12 +11,13 @@ ipEnd="$3"
 if [[ "$ipSegment" == "" ]];
 then
 
-  echo "Syntax error."
-  echo ""
-  echo "Example: `basename $0`  192.168.1  50  80"
-  echo ""
-  echo "This will scan IPs from 192.168.1.50 to 192.168.1.80 and ping every IP."
-  echo "If no or an incomplete range is given, scan will go from .1 to .254"
+  echo >&2 "Syntax error.
+
+Example: `basename $0`  192.168.1  50  80
+
+will scan from 192.168.1.50 to 192.168.1.80 and ping every IP.
+If no or incomplete range is given, scan will go from .1 to .254"
+
   exit 1
 
 fi
@@ -24,7 +25,7 @@ fi
 if [[ "$ipStart" -gt "254" || "$ipEnd" -gt "254" ]];
 then
 
-  echo "Invalid range. Allowed: 1 - 254"
+  echo >&2 "Invalid range. Allowed: 1 - 254"
   exit 1
 
 fi

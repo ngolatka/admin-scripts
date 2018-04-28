@@ -6,9 +6,10 @@
 if [ -z "$1" ] || [ -z "$2" ];
 then
 
-  echo "Missing parameter"
-  echo "Example:"
-  echo "`basename $0` from@example.com to@example.com"
+  echo >&2 "Missing parameter
+
+Example: `basename $0` from@example.com to@example.com"
+
   exit 1
 
 fi
