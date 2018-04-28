@@ -8,7 +8,7 @@ then
 
   echo "Missing parameter"
   echo "Example:"
-  echo "$0 /dev/sda1 85 from@example.com to@example.com"
+  echo "`basename $0` /dev/sda1 85 from@example.com to@example.com"
   exit 1
 
 fi
