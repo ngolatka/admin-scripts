@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Helper script to easily start or stop VNC on a machine
-# with usefull default settings.
+# with useful default settings.
 
 display=1
 
