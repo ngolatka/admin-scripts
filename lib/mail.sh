@@ -3,6 +3,7 @@
 # This script builds a (somewhat) valid email and sends it to the
 # designated receiver(s). Receiver addresses need to be separated
 # with comma + whitespace.
+# This is intended for use with SSMTP.
 
 if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ];
 then
