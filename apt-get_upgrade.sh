@@ -14,6 +14,7 @@ commands=(
   "apt-get check"
   "apt-get update -q"
   "apt-get upgrade -q -y"
+  "DEBIAN_FRONTEND=noninteractive"    # Needed before autoremove to supress warning
   "apt-get autoremove -y"
 )
 
