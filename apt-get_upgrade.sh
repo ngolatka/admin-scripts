@@ -4,42 +4,44 @@
 # packages that are no longer required. It summarizes everything
 # and creates a report file which can e.g. be emailed to someone.
 
-# This is intended for use in Cronjobs, therefore no output is shown.
+# This is intended for use in Cronjobs, therefore no output is
+# shown on the terminal. STDERR from executed commands will also
+# be redirected.
 
 
-seconds=2                                        # Delay time after execution
-output_file="/var/log/apt/apt-get_upgrade.log"   # Report file
+output_file="/var/log/apt/apt-get_upgrade.log"
+commands=(
+  "apt-get check"
+  "apt-get update -q"
+  "apt-get upgrade -q -y"
+  "apt-get autoremove -y"
+)
 
-echo "apt-get on `hostname` from `date "+%d.%m.%Y, %H:%M"`
-______________________________________________
+echo "apt-get on `hostname` on `date "+%d.%m.%Y, %H:%M"`
+" >> $output_file
 
-check
------" > $output_file
+for command in "${commands[@]}";
+do
 
-apt-get check >> $output_file
-sleep $seconds
+  echo -e "$command\n--------" >> $output_file
 
-echo "
-update
-------" >> $output_file
+  eval "$command" >> $output_file 2>&1     # Redirect STDERR to STDOUT, which then goes into the file
 
-apt-get update -q >> $output_file
-sleep $seconds
+  if [ $? -eq 0 ];
+  then
 
-echo "
-upgrade
--------" >> $output_file
+    echo -e "OK\n" >> $output_file
 
-apt-get upgrade -y >> $output_file
-sleep $seconds
+  else
 
-echo "
-autoremove
-----------" >> $output_file
+    echo -e "Aborting\n\nFinished with errors" >> $output_file
+    exit 1
 
-apt-get autoremove -y >> $output_file
+  fi
 
-echo "
-______________________________________________
+  sleep 2
 
-End of report." >> $output_file
+done
+
+echo "Finished, no errors" >> $output_file
+exit 0
