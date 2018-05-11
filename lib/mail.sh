@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script builds a (somewhat) valid email and sends it to the
+# This script builds a minimal valid email and sends it to the
 # designated receiver(s). Receiver addresses need to be separated
 # with comma + whitespace.
 # This is intended for use with SSMTP.
@@ -21,7 +21,8 @@ mailReceiver="$2"
 mailSubject="$3"
 mailContent="$4"
 
-fullMail="From: $mailSender
+fullMail="Date: `date -R`
+From: $mailSender
 To: $mailReceiver
 Subject: $mailSubject
 Content-Type: text/plain; charset=UTF-8; format=flowed
