@@ -9,22 +9,22 @@
 # that nothing grows out of control (apt caches, storage use, etc.).
 
 # This is intended for use in Cronjobs, therefore no output is shown
-# on the terminal. STDERR from executed commands will also be redirected. 
+# on the terminal. STDERR from executed commands will also be redirected.
 # The terminal will be completely silent in any case.
 
 
 logfile="/var/log/apt/apt-get_upgrade.log"
 
 commands=(
+  "DEBIAN_FRONTEND=noninteractive"     # Needed to supress warnings from debconf
   "apt-get update -q"
   "apt-get upgrade -q -y"
-  "DEBIAN_FRONTEND=noninteractive"     # Needed before autoremove to supress warnings from debconf
   "apt-get autoremove -y"
   "apt-get autoclean"
   "apt-get check"
 )
 
-echo -e "apt-get on `hostname` on `date "+%d.%m.%Y, %H:%M"`\n" >> $logfile
+echo -e "apt-get on `hostname` on `date "+%d.%m.%Y, %H:%M"`\n" > $logfile
 
 for command in "${commands[@]}";
 do
@@ -36,7 +36,7 @@ do
   then
 
     echo -e "OK\n" >> $logfile         # Not all commands say if they executed ok, so we add that here
-  
+
   else
 
     echo -e "Aborting\n\nFinished with errors\n------------------------\n" >> $logfile
