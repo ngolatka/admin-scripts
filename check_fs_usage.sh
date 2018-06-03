@@ -28,7 +28,7 @@ inodePercentage=`df -i | grep $fsPath | awk '{print $5}' | tr -d %`
 if [[ $capPercentage -ge $maxPercentage ]];    # Send email if capacity limit exceeded
 then
 
-  bash $scriptPath/lib/mail.sh "$mailfrom" "$mailTo" "Check capacity on $HOSTNAME" "Capacity of $fsPath has reached its limit!\nCurrently at $capPercentage%, limit is $maxPercentage%."
+  bash $scriptPath/lib/mail.sh "$mailFrom" "$mailTo" "Check capacity on $HOSTNAME" "Capacity of $fsPath has reached its limit!\nCurrently at $capPercentage%, limit is $maxPercentage%."
 
 fi
 
